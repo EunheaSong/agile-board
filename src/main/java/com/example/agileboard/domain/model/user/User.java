@@ -1,5 +1,6 @@
 package com.example.agileboard.domain.model.user;
 
+import com.example.agileboard.common.exception.BusinessException;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,7 @@ public class User {
     
     private static void validateEmail(String email) {
         if (email == null || !email.contains("@") || !email.contains(".") || email.length() <= 5) {
-            throw new IllegalArgumentException("잘못된 이메일 형식입니다.");
+            throw new BusinessException("잘못된 이메일 형식입니다.");
         }
     }
     
@@ -31,13 +32,13 @@ public class User {
             !password.matches(".*[A-Z].*") || 
             !password.matches(".*[a-z].*") || 
             !password.matches(".*[0-9].*")) {
-            throw new IllegalArgumentException("비밀번호는 8자 이상, 대소문자와 숫자를 포함해야 합니다.");
+            throw new BusinessException("비밀번호는 8자 이상, 대소문자와 숫자를 포함해야 합니다.");
         }
     }
     
     private static void validateName(String name) {
         if (name == null || name.trim().isEmpty()) {
-            throw new IllegalArgumentException("이름은 필수입니다.");
+            throw new BusinessException("이름은 필수입니다.");
         }
     }
 }
